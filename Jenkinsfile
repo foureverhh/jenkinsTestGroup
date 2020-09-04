@@ -9,7 +9,7 @@ pipeline {
             post{
                 always{
                 echo 'Saving artifacts..'
-                archiveArtifacts artifacts: 'target/my.war', onlyIfSuccessful: true
+                archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
             agent any
             steps{
                 echo 'Deploying ......'
-                sh 'asadmin --port 4848 deploy --force --name my --contextroot my target/my.war'
+                sh 'asadmin --port 4848 deploy --force --name springMVC-1.0-SNAPSHOT --contextroot springMVC-1.0-SNAPSHOT target/springMVC-1.0-SNAPSHOT.war'
             }
         }
     }
