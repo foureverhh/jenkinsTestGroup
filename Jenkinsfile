@@ -6,6 +6,12 @@ pipeline {
                 echo 'Building..'
                 sh 'mvn clean package'
             }
+            post{
+                always{
+                echo 'Saving artifacts..'
+                archiveArtifacts artifacts: 'target/my.war', onlyIfSuccessful: true
+                }
+            }
         }
       /*   stage('Test') {
             steps {
@@ -18,12 +24,7 @@ pipeline {
                 echo 'Deploying..'
                 sh "mvn run"
         } */
-        post{
-            always{
-            echo 'Saving artifacts..'
-            archiveArtifacts artifacts: 'target/my.war', onlyIfSuccessful: true
-            }
-        }
+
         stage ('Deploy') {
             agent any
             steps{
